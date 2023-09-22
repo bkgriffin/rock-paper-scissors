@@ -1,3 +1,9 @@
+const score = {
+  win: 0,
+  tie: 0,
+  lose: 0
+}
+
 // Randomly return either 'Rock', 'Paper', or 'Scissors'.
 function getComputerChoice() {
     const choices = ["Rock", "Paper", "Scissors"];
@@ -20,7 +26,6 @@ function formatPlayerSelection(playerSelection) {
 //
 // TODO: 
 // - Handle invalid input i.e. blank input
-// - Consider "Tie!" being a tie condition, rather than a loss condition.
 function playRound(playerSelection, computerSelection) {
   
     const formattedPlayerSelection = formatPlayerSelection(playerSelection);
@@ -28,75 +33,71 @@ function playRound(playerSelection, computerSelection) {
     if(formattedPlayerSelection === "Rock")
     {
       if(computerSelection === "Rock") {
-        console.log("Tie!  Rock ties Rock.");
-        return false;
+        score.tie += 1;
+        return "Tie!  Rock ties Rock."
       }
       else if (computerSelection === "Paper") {
-        console.log("You Lost!  Paper beats Rock.");
-        return false;
+        score.lose += 1;
+        return "You Lost!  Paper beats Rock."
       }
       else if(computerSelection === "Scissors") {
-        console.log("You Win!  Rock beats Scissors!");
-        return true;
+        score.win += 1;
+        return "You Win!  Rock beats Scissors!"
       }
     }
     else if(formattedPlayerSelection === "Paper")
     {
       if(computerSelection === "Rock") {
-        console.log("You Win!  Paper beats Rock!");
-        return true;
+        score.win += 1;
+        return "You Win!  Paper beats Rock!"
       }
       else if (computerSelection === "Paper") {
-        console.log("Tie!  Paper ties Paper.");
-        return false;
+        score.tie += 1;
+        return "Tie!  Paper ties Paper."
       }
       else if(computerSelection === "Scissors") {
-        console.log("You Lost!  Scissors beats Paper.");
-        return false;
+        score.lose += 1;
+        return "You Lost!  Scissors beats Paper."
       }
     }
     else if(formattedPlayerSelection === "Scissors")
     {
       if(computerSelection === "Rock") {
-        console.log("You Lost!  Rock beats Scissors.");
-        return false;
+        score.lose += 1;
+        return "You Lost!  Rock beats Scissors."
       }
       else if (computerSelection === "Paper") {
-        console.log("You Win!  Scissors beats Paper.");
-        return true;
+        score.win += 1;
+        return "You Win!  Scissors beats Paper."
       }
       else if(computerSelection === "Scissors") {
-        console.log("Tie!  Scissors ties Scissors!");
-        return false;
+        score.tie += 1;
+        return "Tie!  Scissors ties Scissors!"
       }
     }
 }
 
 // Report a winner or loser.
-function getGameStatus(numberOfWins, numberOfRounds) {
-    if(numberOfWins > (numberOfRounds / 2))
+function getGameStatus(numberOfRounds) {
+    if(score.win > score.lose)
         console.log("Congratulations!  You have won the game!");
-    else if(numberOfWins === (numberOfRounds / 2))
+    else if(score.win === score.lose)
         console.log("The game was a tie.");
-    else if(numberOfWins < (numberOfRounds / 2))
+    else if(score.win < score.lose)
         console.log("Oh no!  You have lost the game.");
 }
 
 // Play a 5 round game that keeps score and reports a winner or loser at the end.
 function game() {
     const numberOfRounds = 5;
-    let numberOfWins = 0;
 
     for(let i = 0; i < numberOfRounds; i++) {
       const playerSelection = prompt("Please enter your selection: ");
       const computerSelection = getComputerChoice();
-      
-      // Keep a running count of player wins.
-      if(playRound(playerSelection, computerSelection))
-        numberOfWins++;
+      console.log(playRound(playerSelection, computerSelection));
     }
 
-    getGameStatus(numberOfWins, numberOfRounds);
+    getGameStatus(numberOfRounds);
 }
   
 game();
