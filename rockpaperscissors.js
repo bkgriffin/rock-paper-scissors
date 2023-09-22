@@ -78,7 +78,7 @@ function playRound(playerSelection, computerSelection) {
 }
 
 // Report a winner or loser.
-function getGameStatus(numberOfRounds) {
+function getGameStatus() {
     if(score.win > score.lose)
         console.log("Congratulations!  You have won the game!");
     else if(score.win === score.lose)
@@ -97,7 +97,7 @@ function game() {
       console.log(playRound(playerSelection, computerSelection));
     }
 
-    getGameStatus(numberOfRounds);
+    getGameStatus();
 }
   
 game();
