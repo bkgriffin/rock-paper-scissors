@@ -1,12 +1,29 @@
+const choices = ["Rock", "Paper", "Scissors"];
 const score = {
   win: 0,
   tie: 0,
   lose: 0
 }
 
+// Prompt the user for input of either 'Rock', 'Paper', or 'Scissors'.
+function getPlayerChoice() {
+  let playerChoice = formatPlayerSelection(prompt("Please enter your selection: "));
+  while(!choices.includes(playerChoice)) {
+    playerChoice = formatPlayerSelection(prompt("Please enter your selection: "));
+  }
+  return playerChoice;
+}
+
+// Format the player selection to be case-insensitive.
+function formatPlayerSelection(playerSelection) {
+  if(playerSelection.length > 0)
+    return playerSelection.charAt(0).toUpperCase() + playerSelection.toLowerCase().slice(1);
+  else
+    return null;
+}
+
 // Randomly return either 'Rock', 'Paper', or 'Scissors'.
 function getComputerChoice() {
-    const choices = ["Rock", "Paper", "Scissors"];
     return choices[getRandomInteger(0, 2)];
 }
   
@@ -15,17 +32,9 @@ function getRandomInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
   
-// Format the player selection to be case-insensitive.
-function formatPlayerSelection(playerSelection) {
-    return playerSelection.charAt(0).toUpperCase() + playerSelection.toLowerCase().slice(1);
-}
-  
 // Play a single round of Rock Paper Scissors.
 // If a round results in a win for the player, return true.  
 // Otherwise, return false.
-//
-// TODO: 
-// - Handle invalid input i.e. blank input
 function playRound(playerSelection, computerSelection) {
   
     const formattedPlayerSelection = formatPlayerSelection(playerSelection);
@@ -92,7 +101,7 @@ function game() {
     const numberOfRounds = 5;
 
     for(let i = 0; i < numberOfRounds; i++) {
-      const playerSelection = prompt("Please enter your selection: ");
+      const playerSelection = getPlayerChoice();
       const computerSelection = getComputerChoice();
       console.log(playRound(playerSelection, computerSelection));
     }
