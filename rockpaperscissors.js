@@ -7,17 +7,17 @@ const score = {
 
 // Prompt the user for input of either 'Rock', 'Paper', or 'Scissors'.
 function getPlayerChoice() {
-  let playerChoice = formatPlayerSelection(prompt("Please enter your selection: "));
+  let playerChoice = formatPlayerChoice(prompt("Please enter your selection: "));
   while(!choices.includes(playerChoice)) {
-    playerChoice = formatPlayerSelection(prompt("Please enter your selection: "));
+    playerChoice = formatPlayerChoice(prompt("Invalid input!  Please enter your selection: "));
   }
   return playerChoice;
 }
 
-// Format the player selection to be case-insensitive.
-function formatPlayerSelection(playerSelection) {
-  if(playerSelection.length > 0)
-    return playerSelection.charAt(0).toUpperCase() + playerSelection.toLowerCase().slice(1);
+// Format the player choice to be case-insensitive.
+function formatPlayerChoice(playerChoice) {
+  if(playerChoice.length > 0)
+    return playerChoice.charAt(0).toUpperCase() + playerChoice.toLowerCase().slice(1);
   else
     return null;
 }
@@ -35,51 +35,48 @@ function getRandomInteger(min, max) {
 // Play a single round of Rock Paper Scissors.
 // If a round results in a win for the player, return true.  
 // Otherwise, return false.
-function playRound(playerSelection, computerSelection) {
-  
-    const formattedPlayerSelection = formatPlayerSelection(playerSelection);
-  
-    if(formattedPlayerSelection === "Rock")
+function playRound(playerChoice, computerChoice) {  
+    if(playerChoice === "Rock")
     {
-      if(computerSelection === "Rock") {
+      if(computerChoice === "Rock") {
         score.tie += 1;
         return "Tie!  Rock ties Rock."
       }
-      else if (computerSelection === "Paper") {
+      else if (computerChoice === "Paper") {
         score.lose += 1;
         return "You Lost!  Paper beats Rock."
       }
-      else if(computerSelection === "Scissors") {
+      else if(computerChoice === "Scissors") {
         score.win += 1;
         return "You Win!  Rock beats Scissors!"
       }
     }
-    else if(formattedPlayerSelection === "Paper")
+    else if(playerChoice === "Paper")
     {
-      if(computerSelection === "Rock") {
+      if(computerChoice === "Rock") {
         score.win += 1;
         return "You Win!  Paper beats Rock!"
       }
-      else if (computerSelection === "Paper") {
+      else if (computerChoice === "Paper") {
         score.tie += 1;
         return "Tie!  Paper ties Paper."
       }
-      else if(computerSelection === "Scissors") {
+      else if(computerChoice === "Scissors") {
         score.lose += 1;
         return "You Lost!  Scissors beats Paper."
       }
     }
-    else if(formattedPlayerSelection === "Scissors")
+    else if(playerChoice === "Scissors")
     {
-      if(computerSelection === "Rock") {
+      if(computerChoice === "Rock") {
         score.lose += 1;
         return "You Lost!  Rock beats Scissors."
       }
-      else if (computerSelection === "Paper") {
+      else if (computerChoice === "Paper") {
         score.win += 1;
         return "You Win!  Scissors beats Paper."
       }
-      else if(computerSelection === "Scissors") {
+      else if(computerChoice === "Scissors") {
         score.tie += 1;
         return "Tie!  Scissors ties Scissors!"
       }
@@ -99,11 +96,10 @@ function getGameStatus() {
 // Play a 5 round game that keeps score and reports a winner or loser at the end.
 function game() {
     const numberOfRounds = 5;
-
     for(let i = 0; i < numberOfRounds; i++) {
-      const playerSelection = getPlayerChoice();
-      const computerSelection = getComputerChoice();
-      console.log(playRound(playerSelection, computerSelection));
+      const playerChoice = getPlayerChoice();
+      const computerChoice = getComputerChoice();
+      console.log(playRound(playerChoice, computerChoice));
     }
 
     getGameStatus();
