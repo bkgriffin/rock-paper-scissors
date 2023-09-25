@@ -33,8 +33,6 @@ function getRandomInteger(min, max) {
 }
   
 // Play a single round of Rock Paper Scissors.
-// If a round results in a win for the player, return true.  
-// Otherwise, return false.
 function playRound(playerChoice, computerChoice) {  
     if(playerChoice === "Rock")
     {
@@ -83,6 +81,11 @@ function playRound(playerChoice, computerChoice) {
     }
 }
 
+// Get the choices made by both the player and computer.
+function getChoicesMade(playerChoice, computerChoice) {
+  return "Player Choice: " + playerChoice + ", Computer Choice: " + computerChoice + "\n";
+}
+
 // Report a winner or loser.
 function getGameStatus() {
     if(score.win > score.lose)
@@ -99,6 +102,7 @@ function game() {
     for(let i = 0; i < numberOfRounds; i++) {
       const playerChoice = getPlayerChoice();
       const computerChoice = getComputerChoice();
+      console.log(getChoicesMade(playerChoice, computerChoice));
       console.log(playRound(playerChoice, computerChoice));
     }
 
