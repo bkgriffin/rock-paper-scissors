@@ -86,18 +86,24 @@ function getChoicesMade(playerChoice, computerChoice) {
   return "Player Choice: " + playerChoice + ", Computer Choice: " + computerChoice + "\n";
 }
 
+// Get the score of the game.
+function getGameScore() { 
+  return "Win: " + score.win + ", Tie: " + score.tie + ", Lose: " + score.lose; 
+}
+
 // Report a winner or loser.
 function getGameStatus() {
     if(score.win > score.lose)
-        console.log("Congratulations!  You have won the game!");
+        return "Congratulations!  You have won the game!";
     else if(score.win === score.lose)
-        console.log("The game was a tie.");
+        return "The game was a tie.";
     else if(score.win < score.lose)
-        console.log("Oh no!  You have lost the game.");
+        return "Oh no!  You have lost the game.";
 }
 
 // Play a 5 round game that keeps score and reports a winner or loser at the end.
 function game() {
+  /*
     const numberOfRounds = 5;
     for(let i = 0; i < numberOfRounds; i++) {
       const playerChoice = getPlayerChoice();
@@ -105,8 +111,40 @@ function game() {
       console.log(getChoicesMade(playerChoice, computerChoice));
       console.log(playRound(playerChoice, computerChoice));
     }
+  */
+    const rockButton = document.querySelector(".rock-button");
+    const paperButton = document.querySelector(".paper-button");
+    const scissorsButton = document.querySelector(".scissors-button");
+    const gameResultsDiv = document.querySelector(".game-results");
 
-    getGameStatus();
+    rockButton.addEventListener('click', () => {
+      const playerChoice = 'Rock';
+      const computerChoice = getComputerChoice();
+      gameResultsDiv.textContent = 
+        getChoicesMade(playerChoice, computerChoice) + 
+        playRound(playerChoice, computerChoice) + 
+        getGameScore();
+    });
+
+    paperButton.addEventListener('click', () => {
+      const playerChoice = 'Paper';
+      const computerChoice = getComputerChoice();
+      gameResultsDiv.textContent = 
+        getChoicesMade(playerChoice, computerChoice) + 
+        playRound(playerChoice, computerChoice) + 
+        getGameScore();
+    });
+
+    scissorsButton.addEventListener('click', () => {
+      const playerChoice = 'Scissors';
+      const computerChoice = getComputerChoice();
+      gameResultsDiv.textContent = 
+        getChoicesMade(playerChoice, computerChoice) + 
+        playRound(playerChoice, computerChoice) + 
+        getGameScore();
+    });
+
+    //gameResultsDiv.textContent = getGameStatus();
 }
   
 game();
