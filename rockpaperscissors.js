@@ -113,7 +113,7 @@ function endGame(rockButton, paperButton, scissorsButton, gameRoundsDiv, gameCho
   // TODO:
   // - Style page
   // - Modify event listener code?  Lots of duplication at the moment, could condense?
-  // - Modify endGame() method.  Lots of values being passed in.
+  // - Modify endGame() method.  Lots of values being passed in.  Probably split into several methods?
   const resetButton = document.querySelector(".reset-button");
 
   // Disable Player Choice buttons.  Enabled the reset button.
@@ -143,61 +143,39 @@ function endGame(rockButton, paperButton, scissorsButton, gameRoundsDiv, gameCho
 
 }
 
+// Process the choice made by the player against the choice made by the computer.
+function processPlayerChoice(playerChoice) {
+  const rockButton = document.querySelector(".rock-button");
+  const paperButton = document.querySelector(".paper-button");
+  const scissorsButton = document.querySelector(".scissors-button");
+  const gameRoundsDiv = document.querySelector(".game-rounds");
+  const gameChoicesDiv = document.querySelector(".game-choices");
+  const gameResultsDiv = document.querySelector(".game-results");
+  const gameStatusDiv = document.querySelector(".game-status");
+  const gameScoreDiv = document.querySelector(".game-score");
+
+  const computerChoice = getComputerChoice();
+  gameChoicesDiv.textContent = getChoicesMade(playerChoice, computerChoice);
+  gameResultsDiv.textContent = playRound(playerChoice, computerChoice);
+  gameScoreDiv.textContent = getGameScore();
+  gameRoundsDiv.textContent = getGameRounds();
+
+  // Report the game status and end the gameplay loop after 5 rounds.
+  if(rounds === 5) {
+    gameStatusDiv.textContent = getGameStatus();
+    endGame(rockButton, paperButton, scissorsButton, gameRoundsDiv, gameChoicesDiv, gameResultsDiv, gameStatusDiv, gameScoreDiv);
+  }   
+}
+
 // Play a 5 round game that keeps score and reports a winner or loser at the end.
 function game() {
     const rockButton = document.querySelector(".rock-button");
     const paperButton = document.querySelector(".paper-button");
     const scissorsButton = document.querySelector(".scissors-button");
-    const gameRoundsDiv = document.querySelector(".game-rounds");
-    const gameChoicesDiv = document.querySelector(".game-choices");
-    const gameResultsDiv = document.querySelector(".game-results");
-    const gameStatusDiv = document.querySelector(".game-status");
-    const gameScoreDiv = document.querySelector(".game-score");
 
-    rockButton.addEventListener('click', () => {
-      const playerChoice = 'Rock';
-      const computerChoice = getComputerChoice();
-      gameChoicesDiv.textContent = getChoicesMade(playerChoice, computerChoice);
-      gameResultsDiv.textContent = playRound(playerChoice, computerChoice);
-      gameScoreDiv.textContent = getGameScore();
-      gameRoundsDiv.textContent = getGameRounds();
-
-      // Report the game status and end the gameplay loop after 5 rounds.
-      if(rounds === 5) {
-        gameStatusDiv.textContent = getGameStatus();
-        endGame(rockButton, paperButton, scissorsButton, gameRoundsDiv, gameChoicesDiv, gameResultsDiv, gameStatusDiv, gameScoreDiv);
-      }      
-    });
-
-    paperButton.addEventListener('click', () => {
-      const playerChoice = 'Paper';
-      const computerChoice = getComputerChoice();
-      gameChoicesDiv.textContent = getChoicesMade(playerChoice, computerChoice);
-      gameResultsDiv.textContent = playRound(playerChoice, computerChoice);
-      gameScoreDiv.textContent = getGameScore();
-      gameRoundsDiv.textContent = getGameRounds();
-
-      // Report the game status and end the gameplay loop after 5 rounds.
-      if(rounds === 5) {
-        gameStatusDiv.textContent = getGameStatus();
-        endGame(rockButton, paperButton, scissorsButton, gameRoundsDiv, gameChoicesDiv, gameResultsDiv, gameStatusDiv, gameScoreDiv);
-      }      
-    });
-
-    scissorsButton.addEventListener('click', () => {
-      const playerChoice = 'Scissors';
-      const computerChoice = getComputerChoice();
-      gameChoicesDiv.textContent = getChoicesMade(playerChoice, computerChoice);
-      gameResultsDiv.textContent = playRound(playerChoice, computerChoice);
-      gameScoreDiv.textContent = getGameScore();
-      gameRoundsDiv.textContent = getGameRounds();
-
-      // Report the game status and end the gameplay loop after 5 rounds.
-      if(rounds === 5) {
-        gameStatusDiv.textContent = getGameStatus();
-        endGame(rockButton, paperButton, scissorsButton, gameRoundsDiv, gameChoicesDiv, gameResultsDiv, gameStatusDiv, gameScoreDiv);
-      }
-    });
+    rockButton.addEventListener('click', function() { processPlayerChoice('Rock'); });
+    paperButton.addEventListener('click', function() { processPlayerChoice('Paper'); });
+    scissorsButton.addEventListener('click', function() { processPlayerChoice('Scissors'); });
 }
   
 game();
