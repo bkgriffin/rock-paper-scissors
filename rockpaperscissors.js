@@ -36,7 +36,6 @@ function getRandomInteger(min, max) {
 // Play a single round of Rock Paper Scissors.
 function playRound(playerChoice, computerChoice) {  
     rounds += 1;
-    console.log(rounds);
     if(playerChoice === "Rock")
     {
       if(computerChoice === "Rock") {
@@ -110,15 +109,38 @@ function getGameRounds() {
 }
 
 // End the gamplay loop.
-function endGame() {
+function endGame(rockButton, paperButton, scissorsButton, gameRoundsDiv, gameChoicesDiv, gameResultsDiv, gameStatusDiv, gameScoreDiv) {
   // TODO:
-  // - Disable choice buttons.
-  // - Enable a reset button.
-  // - Add event listener to reset button:
-  //     + Reset score/rounds/choices/results/status divs.
-  //
   // - Style page
   // - Modify event listener code?  Lots of duplication at the moment, could condense?
+  // - Modify endGame() method.  Lots of values being passed in.
+  const resetButton = document.querySelector(".reset-button");
+
+  // Disable Player Choice buttons.  Enabled the reset button.
+  rockButton.disabled = true;
+  paperButton.disabled = true;
+  scissorsButton.disabled = true;
+  resetButton.disabled = false;
+  
+  resetButton.addEventListener('click', () => {
+    // Reset score/rounds/choices/results/status divs.
+    gameRoundsDiv.textContent = ""; 
+    gameChoicesDiv.textContent = "";
+    gameResultsDiv.textContent = "";
+    gameStatusDiv.textContent = "";
+    gameScoreDiv.textContent = "";
+    score.win = 0;
+    score.tie = 0;
+    score.lose = 0;
+    rounds = 0;
+
+    // Enable the player choice buttons.  Disable the reset button.
+    rockButton.disabled = false;
+    paperButton.disabled = false;
+    scissorsButton.disabled = false;
+    resetButton.disabled = true;
+  });
+
 }
 
 // Play a 5 round game that keeps score and reports a winner or loser at the end.
@@ -143,7 +165,7 @@ function game() {
       // Report the game status and end the gameplay loop after 5 rounds.
       if(rounds === 5) {
         gameStatusDiv.textContent = getGameStatus();
-        endGame();
+        endGame(rockButton, paperButton, scissorsButton, gameRoundsDiv, gameChoicesDiv, gameResultsDiv, gameStatusDiv, gameScoreDiv);
       }      
     });
 
@@ -158,7 +180,7 @@ function game() {
       // Report the game status and end the gameplay loop after 5 rounds.
       if(rounds === 5) {
         gameStatusDiv.textContent = getGameStatus();
-        endGame();
+        endGame(rockButton, paperButton, scissorsButton, gameRoundsDiv, gameChoicesDiv, gameResultsDiv, gameStatusDiv, gameScoreDiv);
       }      
     });
 
@@ -173,7 +195,7 @@ function game() {
       // Report the game status and end the gameplay loop after 5 rounds.
       if(rounds === 5) {
         gameStatusDiv.textContent = getGameStatus();
-        endGame();
+        endGame(rockButton, paperButton, scissorsButton, gameRoundsDiv, gameChoicesDiv, gameResultsDiv, gameStatusDiv, gameScoreDiv);
       }
     });
 }
