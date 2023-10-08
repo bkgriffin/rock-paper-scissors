@@ -172,7 +172,8 @@ function processPlayerChoice(playerChoice) {
   }   
 }
 
-// Play a 5 round game that keeps score and reports a winner or loser at the end.
+// Play the game for a number of rounds, keeping score for each round.
+// Report a winner or loser after all rounds have been played.
 function game() {
     const rockButton = document.querySelector(".rock-button");
     const paperButton = document.querySelector(".paper-button");
