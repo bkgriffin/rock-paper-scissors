@@ -1,4 +1,5 @@
 const GAME_CHOICES = ["Rock", "Paper", "Scissors"];
+const ROUNDS_TO_PLAY = 5;
 const score = {
   win: 0,
   tie: 0,
@@ -165,7 +166,7 @@ function processPlayerChoice(playerChoice) {
   gameRoundsDiv.textContent = getGameRounds();
 
   // Report the game status and end the gameplay loop after 5 rounds.
-  if(rounds === 5) {
+  if(rounds === ROUNDS_TO_PLAY) {
     gameStatusDiv.textContent = getGameStatus();
     endGame(rockButton, paperButton, scissorsButton, gameRoundsDiv, gameChoicesDiv, gameResultsDiv, gameStatusDiv, gameScoreDiv);
   }   
