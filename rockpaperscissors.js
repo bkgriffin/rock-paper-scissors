@@ -165,7 +165,7 @@ function processPlayerChoice(playerChoice) {
   gameScoreDiv.textContent = getGameScore();
   gameRoundsDiv.textContent = getGameRounds();
 
-  // Report the game status and end the gameplay loop after 5 rounds.
+  // Report the game status and end the gameplay loop after all rounds have been played.
   if(rounds === ROUNDS_TO_PLAY) {
     gameStatusDiv.textContent = getGameStatus();
     endGame(rockButton, paperButton, scissorsButton, gameRoundsDiv, gameChoicesDiv, gameResultsDiv, gameStatusDiv, gameScoreDiv);
