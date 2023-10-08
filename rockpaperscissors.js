@@ -1,4 +1,4 @@
-const choices = ["Rock", "Paper", "Scissors"];
+const GAME_CHOICES = ["Rock", "Paper", "Scissors"];
 const score = {
   win: 0,
   tie: 0,
@@ -6,26 +6,9 @@ const score = {
 }
 let rounds = 0;
 
-// Prompt the user for input of either 'Rock', 'Paper', or 'Scissors'.
-function getPlayerChoice() {
-  let playerChoice = formatPlayerChoice(prompt("Please enter your selection: "));
-  while(!choices.includes(playerChoice)) {
-    playerChoice = formatPlayerChoice(prompt("Invalid input!  Please enter your selection: "));
-  }
-  return playerChoice;
-}
-
-// Format the player choice to be case-insensitive.
-function formatPlayerChoice(playerChoice) {
-  if(playerChoice.length > 0)
-    return playerChoice.charAt(0).toUpperCase() + playerChoice.toLowerCase().slice(1);
-  else
-    return null;
-}
-
 // Randomly return either 'Rock', 'Paper', or 'Scissors'.
 function getComputerChoice() {
-    return choices[getRandomInteger(0, 2)];
+    return GAME_CHOICES[getRandomInteger(0, 2)];
 }
   
 // Get a random integer.
@@ -85,7 +68,7 @@ function playRound(playerChoice, computerChoice) {
 
 // Get the choices made by both the player and computer.
 function getChoicesMade(playerChoice, computerChoice) {
-  return "Player Choice: " + playerChoice + ", Computer Choice: " + computerChoice + "\n";
+  return "Player Choice: " + playerChoice + ", Computer Choice: " + computerChoice;
 }
 
 // Get the score of the game.
@@ -108,39 +91,60 @@ function getGameRounds() {
   return "Round: " + rounds;
 }
 
+// Set the text content of the divs.
+function setDivTextContent(textDivs) { 
+  textDivs.forEach(textDiv => {
+    textDiv.Div.textContent = textDiv.TextContent;
+  });
+}
+
+// Set the disabled status of the buttons.
+function setButtonDisabledStatus(buttonStates) { 
+  buttonStates.forEach(buttonState => {
+    buttonState.Button.disabled = buttonState.Disabled;
+  });
+}
+
+// Reset game score and rounds.
+function resetGame() {
+  score.win = 0;
+  score.tie = 0;
+  score.lose = 0;
+  rounds = 0;
+}
+
 // End the gamplay loop.
 function endGame(rockButton, paperButton, scissorsButton, gameRoundsDiv, gameChoicesDiv, gameResultsDiv, gameStatusDiv, gameScoreDiv) {
-  // TODO:
-  // - Style page
-  // - Modify event listener code?  Lots of duplication at the moment, could condense?
-  // - Modify endGame() method.  Lots of values being passed in.  Probably split into several methods?
   const resetButton = document.querySelector(".reset-button");
 
   // Disable Player Choice buttons.  Enabled the reset button.
-  rockButton.disabled = true;
-  paperButton.disabled = true;
-  scissorsButton.disabled = true;
-  resetButton.disabled = false;
+  setButtonDisabledStatus([    
+    { Button: rockButton, Disabled: true }, 
+    { Button: paperButton, Disabled: true },
+    { Button: scissorsButton, Disabled: true },
+    { Button: resetButton, Disabled: false }
+  ]);
   
   resetButton.addEventListener('click', () => {
     // Reset score/rounds/choices/results/status divs.
-    gameRoundsDiv.textContent = ""; 
-    gameChoicesDiv.textContent = "";
-    gameResultsDiv.textContent = "";
-    gameStatusDiv.textContent = "";
-    gameScoreDiv.textContent = "";
-    score.win = 0;
-    score.tie = 0;
-    score.lose = 0;
-    rounds = 0;
+    setDivTextContent([
+      { Div: gameRoundsDiv, TextContent: "" }, 
+      { Div: gameChoicesDiv, TextContent: "" }, 
+      { Div: gameResultsDiv, TextContent: "" }, 
+      { Div: gameStatusDiv, TextContent: "" }, 
+      { Div: gameScoreDiv, TextContent: "" } 
+    ]);
 
     // Enable the player choice buttons.  Disable the reset button.
-    rockButton.disabled = false;
-    paperButton.disabled = false;
-    scissorsButton.disabled = false;
-    resetButton.disabled = true;
-  });
+    setButtonDisabledStatus([    
+      { Button: rockButton, Disabled: false }, 
+      { Button: paperButton, Disabled: false },
+      { Button: scissorsButton, Disabled: false },
+      { Button: resetButton, Disabled: true }
+    ]);
 
+    resetGame();
+  });
 }
 
 // Process the choice made by the player against the choice made by the computer.
