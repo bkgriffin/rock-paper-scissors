@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+div {
+    color:#fff0f5;    
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    font-family: Roboto, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color:#2f4f4f;
+}
+
+button {
+    font-family: Roboto, sans-serif;
+    min-width: 80px;
+    min-height: 35px;
+    border-radius: 8px;
+    background: #dbdbdb;
+    padding: 8px 16px;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.reset-button-container { 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.game-rounds {
+    font-size: x-large;
+    margin: 16px;
+}
+
+.game-score {
+    margin-bottom: 16px;
+}
+
+.game-choices {
+    margin-top: 16px;
+}
+
+.game-rounds, 
+.game-status {
+    font-weight: bold;
+}
+
+.button-container,
+.reset-button-container,
+.reset-button {
+    width: 260px;
+}
+
+.game-results,
+.game-status {
+    margin-top: 8px;
+}
+
+.game-choices,
+.game-results,
+.game-status {
+    min-width: 20px;
+    min-height: 20px;
+}
+

@@ -129,11 +129,11 @@ function endGame(rockButton, paperButton, scissorsButton, gameRoundsDiv, gameCho
   resetButton.addEventListener('click', () => {
     // Reset score/rounds/choices/results/status divs.
     setDivTextContent([
-      { Div: gameRoundsDiv, TextContent: "" }, 
+      { Div: gameRoundsDiv, TextContent: "Round: 0" }, 
       { Div: gameChoicesDiv, TextContent: "" }, 
       { Div: gameResultsDiv, TextContent: "" }, 
       { Div: gameStatusDiv, TextContent: "" }, 
-      { Div: gameScoreDiv, TextContent: "" } 
+      { Div: gameScoreDiv, TextContent: "Win: 0, Tie: 0, Lose: 0" } 
     ]);
 
     // Enable the player choice buttons.  Disable the reset button.
