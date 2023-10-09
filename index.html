@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="rockpaperscissors.js" defer></script>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Page Title</title>
+  <script src="rockpaperscissors.js" defer></script>
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+  <div class="game-rounds">Round: 0</div>
+  <div class="game-score">Win: 0, Tie: 0, Lose: 0</div>
   <div class="button-container">
     <button class="rock-button">Rock</button>
     <button class="paper-button">Paper</button>
     <button class="scissors-button">Scissors</button>
   </div>
-  <button disabled class="reset-button">Reset</button>
+  <div class="reset-button-container">
+    <button disabled class="reset-button">Reset</button>
+  </div>
   <div class="game-choices"></div>
   <div class="game-results"></div>
-  <div class="game-rounds"></div>
-  <div class="game-score"></div>
   <div class="game-status"></div>
 </body>
 </html>

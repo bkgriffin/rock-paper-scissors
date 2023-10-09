@@ -129,11 +129,11 @@ function endGame(rockButton, paperButton, scissorsButton, gameRoundsDiv, gameCho
   resetButton.addEventListener('click', () => {
     // Reset score/rounds/choices/results/status divs.
     setDivTextContent([
-      { Div: gameRoundsDiv, TextContent: "" }, 
+      { Div: gameRoundsDiv, TextContent: "Round: 0" }, 
       { Div: gameChoicesDiv, TextContent: "" }, 
       { Div: gameResultsDiv, TextContent: "" }, 
       { Div: gameStatusDiv, TextContent: "" }, 
-      { Div: gameScoreDiv, TextContent: "" } 
+      { Div: gameScoreDiv, TextContent: "Win: 0, Tie: 0, Lose: 0" } 
     ]);
 
     // Enable the player choice buttons.  Disable the reset button.
@@ -165,14 +165,15 @@ function processPlayerChoice(playerChoice) {
   gameScoreDiv.textContent = getGameScore();
   gameRoundsDiv.textContent = getGameRounds();
 
-  // Report the game status and end the gameplay loop after 5 rounds.
+  // Report the game status and end the gameplay loop after all rounds have been played.
   if(rounds === ROUNDS_TO_PLAY) {
     gameStatusDiv.textContent = getGameStatus();
     endGame(rockButton, paperButton, scissorsButton, gameRoundsDiv, gameChoicesDiv, gameResultsDiv, gameStatusDiv, gameScoreDiv);
   }   
 }
 
-// Play a 5 round game that keeps score and reports a winner or loser at the end.
+// Play the game for a number of rounds, keeping score for each round.
+// Report a winner or loser after all rounds have been played.
 function game() {
     const rockButton = document.querySelector(".rock-button");
     const paperButton = document.querySelector(".paper-button");
